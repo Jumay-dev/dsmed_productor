@@ -8,6 +8,7 @@ class PublicClass
 
             function woodmart_hover_image() {
                 global $product;
+                $product_id = $product->get_id();
             
                 // $attachment_ids = $product->get_gallery_image_ids();
         
@@ -30,8 +31,8 @@ class PublicClass
                         <a href="<?php echo esc_url( get_permalink() ); ?>">
                             <table>
                                 <tr>
-                                    <td>Длина: </td>
-                                    <td>100</td>
+                                    <td>ID: </td>
+                                    <td><?= $product_id ?></td>
                                 </tr>
                                 <tr>
                                     <td>Ширина: </td>
