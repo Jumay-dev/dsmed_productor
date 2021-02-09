@@ -18,7 +18,7 @@ class Activator
             PRIMARY KEY (id),
             KEY id (id)
             ) $charset_collate;";
-        dbDelta( $keymaker_table );
+        dbDelta( $table_structure );
 
         $query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table_name ) );
         if ( ! $wpdb->get_var( $query ) == $table_name ) {
