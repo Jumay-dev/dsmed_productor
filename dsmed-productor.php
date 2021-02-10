@@ -22,6 +22,12 @@ if ( ! defined( 'WPINC' ) ) {
 }
 wp_enqueue_script("jquery");
 
+add_action( 'wp_enqueue_scripts', 'add_productor_style' );
+
+function add_productor_style() {
+	wp_enqueue_style( 'myStyle', plugins_url( 'style.css', __FILE__ ), false );
+}
+
 function activate_dsmed_productor() {
     require_once plugin_dir_path( __FILE__ ) . 'includes/Activator.php';
     Activator::activate();

@@ -21,7 +21,6 @@ class Productor
         global $wpdb;
         $prefix = $wpdb->get_blog_prefix();
         $table_name = $prefix . 'dsmed_productor';
-        $dbname = $wpdb->dbname;
 
         if($_SERVER['REQUEST_METHOD'] === "GET") {
             if($_GET['action'] === 'add_info') {
@@ -29,7 +28,7 @@ class Productor
                     $product_id = $_GET['product_id'];
                     $product_info = $_GET['product_info'];
 
-                    $check = $wpdb->get_row("SELECT * FROM $table_name WHERE product_id = '$product_id'");
+                    $check = $wpdb->get_row("SELECT * FROM $table_name WHERE product_id = $product_id");
 
                     $res;
 
@@ -40,34 +39,16 @@ class Productor
                     } else {
                         $res = $wpdb->insert($table_name, array(
                             'product_id' => $product_id,
-                            'product_info' => $product_info
+                            'info' => $product_info
                         )); 
                     }
 
-                    if($res) {
-                        $ans['success'] = true;
-                        $ans['content'] = $wpdb->get_results("SELECT * FROM $table_name WHERE product_id = $product_id", ARRAY_A);
-                        die(json_encode($ans));
-                    } else {
-                        $ans['success'] = false;
-                        $ans['content'] = null;
-                        die(json_encode($ans));
-                    }
+                    die(json_encode(array('success' => true)));
                 }
             }
             if($_GET['action'] === 'get_info') {
                 if (isset($_GET['product_id'])) {
                     $res = $wpdb->get_row("SELECT * FROM $table_name WHERE product_id = '$product_id'", ARRAY_A);
-                }
-
-                if($res) {
-                    $ans['success'] = true;
-                    $ans['content'] = $res;
-                    die(json_encode($ans));
-                } else {
-                    $ans['success'] = false;
-                    $ans['content'] = null;
-                    die(json_encode($ans));
                 }
             }
         }

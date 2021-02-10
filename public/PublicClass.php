@@ -7,8 +7,18 @@ class PublicClass
             add_action("mu_plugin_loaded", "woodmart_hover_image");
 
             function woodmart_hover_image() {
-                global $product;
+                global $product, $wpdb;
                 $product_id = $product->get_id();
+                $prefix = $wpdb->get_blog_prefix();
+                $table_name = $prefix . 'dsmed_productor';
+
+                $res = $wpdb->get_row("SELECT info FROM $table_name WHERE product_id = $product_id");
+
+                $sentences = array();
+
+                if ($res) {
+                    $sentences = explode(';', $res->info);
+                }
             
                 // $attachment_ids = $product->get_gallery_image_ids();
         
@@ -26,24 +36,17 @@ class PublicClass
                     </div>
                 <?php endif;
 
-                if( $hover_image == ''): ?>
+                if( $hover_image == '' && $res): ?>
                     <div class="hover-img">
-                        <a href="<?php echo esc_url( get_permalink() ); ?>">
-                            <table>
-                                <tr>
-                                    <td>ID: </td>
-                                    <td><?= $product_id ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Ширина: </td>
-                                    <td>200</td>
-                                </tr>
-                                <tr>
-                                    <td>Высота: </td>
-                                    <td>300</td>
-                                </tr>
-                            </table>
-                        </a>
+                        <?php 
+                        foreach($sentences as $one) {
+                            ?>
+                            <div class="plank">
+                                <?= $one ?>
+                            </div>
+                            <?php
+                        }
+                        ?>
                     </div>
                 <?php endif;
             }
