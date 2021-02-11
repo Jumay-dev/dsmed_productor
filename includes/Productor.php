@@ -48,7 +48,16 @@ class Productor
             }
             if($_GET['action'] === 'get_info') {
                 if (isset($_GET['product_id'])) {
+                    $product_id = $_GET['product_id'];
                     $res = $wpdb->get_row("SELECT * FROM $table_name WHERE product_id = '$product_id'", ARRAY_A);
+                }
+            }
+
+            if($_GET['action'] === 'delete_info') {
+                if (isset($_GET['product_id'])) {
+                    $product_id = $_GET['product_id'];
+                    $wpdb->query("DELETE FROM $table_name WHERE product_id = '$product_id'", ARRAY_A);
+                    $wpdb->delete($table_name, array("product_id" => $product_id));
                 }
             }
         }

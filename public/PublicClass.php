@@ -38,15 +38,21 @@ class PublicClass
 
                 if( $hover_image == '' && $res): ?>
                     <div class="hover-img">
-                        <?php 
-                        foreach($sentences as $one) {
-                            ?>
-                            <div class="plank">
-                                <?= $one ?>
-                            </div>
-                            <?php
-                        }
-                        ?>
+                        <div id="plank__container">
+                            
+                                <?php 
+                                foreach($sentences as $one) {
+                                    ?>
+                                    <a class="plank" href="<?php echo esc_url( get_permalink() ); ?>">
+                                        <div >
+                                            <?= $one ?>
+                                        </div>
+                                    </a>
+                                    <?php
+                                }
+                                ?>
+                            
+                        </div>
                     </div>
                 <?php endif;
             }

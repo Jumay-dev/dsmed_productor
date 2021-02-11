@@ -4,4 +4,28 @@
     width: 70%;
     color: white;
     font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+#plank__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#productor__form {
+    display: flex;
+    margin-left: 1em;
+    justify-content: center;
+}
+
+#submitter {
+    height: 100%;
+}
+
+#deleter {
+    height: 100%;
 }
