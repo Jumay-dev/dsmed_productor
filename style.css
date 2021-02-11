@@ -1,11 +1,13 @@
 .plank {
-    border-radius: 10px !important;
-    background-color: rgba(53,97,163,1)!important;
     width: 70%;
-    color: white;
+    color: #4a4a4a;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.1);
     font-weight: bold;
-    display: block;
+    display: flex;
     margin-top: 10px;
+    min-height: 4em;
+    justify-content: center;
+    align-items: center;
 }
 
 #plank__container {
