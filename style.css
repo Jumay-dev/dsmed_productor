@@ -31,3 +31,7 @@
 #deleter {
     height: 100%;
 }
+
+#hover-img {
+    transition: none !important
+}
