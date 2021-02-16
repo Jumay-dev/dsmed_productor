@@ -37,7 +37,7 @@ class PublicClass
                 <?php endif;
 
                 if( $hover_image == '' && $res): ?>
-                    <div class="hover-img">
+                    <div class="hover-img" style="transition: none !important">
                     <a  href="<?php echo esc_url( get_permalink() ); ?>">
                         <div id="plank__container">
                             <?php 
