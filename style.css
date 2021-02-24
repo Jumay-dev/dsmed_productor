@@ -1,13 +1,31 @@
+
 .plank {
-    width: 70%;
+    width: 80%;
     color: #4a4a4a;
     box-shadow: 1px 1px 1px rgba(0,0,0,.1);
     font-weight: bold;
+    font-size: 0.7em;
     display: flex;
     margin-top: 10px;
-    min-height: 4em;
+    min-height: 3em;
     justify-content: center;
     align-items: center;
+}
+
+
+@media (min-width: 1120px) {
+    .plank {
+        width: 70%;
+        color: #4a4a4a;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, .1);
+        font-weight: bold;
+        font-size: 1em;
+        display: flex;
+        margin-top: 10px;
+        min-height: 3em;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 #plank__container {

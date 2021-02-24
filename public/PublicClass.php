@@ -19,14 +19,8 @@ class PublicClass
                 if ($res) {
                     $sentences = explode(';', $res->info);
                 }
-            
-                // $attachment_ids = $product->get_gallery_image_ids();
-        
+
                 $hover_image = '';
-        
-                // if ( ! empty( $attachment_ids[0] ) ) {
-                //     $hover_image = woodmart_get_product_thumbnail( 'woocommerce_thumbnail', $attachment_ids[0] );
-                // }
         
                 if( $hover_image != '' && woodmart_get_opt( 'hover_image' ) ): ?>
                     <div class="hover-img">
@@ -37,23 +31,44 @@ class PublicClass
                 <?php endif;
 
                 if( $hover_image == '' && $res): ?>
-                    <div class="hover-img" style="transition: none !important">
-                    <a  href="<?php echo esc_url( get_permalink() ); ?>">
-                        <div id="plank__container">
-                            <?php 
-                            foreach($sentences as $one) {
-                                ?>
-                                    <div class="plank">
-                                        <?= $one ?>
-                                    </div>
+                    <div class="hover-img" id="hover-container" style="transition: none !important">
+                        <a  href="<?php echo esc_url( get_permalink() ); ?>">
+                            <div id="plank__container">
                                 <?php
-                            }
-                            ?>
-                        </div>
+                                foreach($sentences as $one) {
+                                    ?>
+                                        <div class="plank">
+                                            <?= $one ?>
+                                        </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
                         </a>
                     </div>
                 <?php endif;
             }
+        }
+
+        add_action( 'wp_enqueue_scripts', 'switchOffPlanksIfTooSmall' );
+
+        function switchOffPlanksIfTooSmall() {
+            ?>
+                <script>
+                    document.addEventListener("DOMContentLoaded",() => {
+                        let containers = document.getElementsByClassName('hover-img')
+                        for (let nodeIndex = 0; nodeIndex < containers.length; nodeIndex++) {
+                            let currentStyles = getComputedStyle(containers[nodeIndex])
+                            let width = currentStyles.width
+                            let realWidth = +width.replace('px', "")
+                            console.log(realWidth)
+                            if (realWidth < 200) {
+                                containers[nodeIndex].style.display = "none"
+                            }
+                        }
+                    })
+                </script>
+            <?php
         }
     }
 }
